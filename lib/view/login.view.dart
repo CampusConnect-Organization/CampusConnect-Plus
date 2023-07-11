@@ -1,8 +1,9 @@
 import 'package:campus_connect_plus/utils/global.colors.dart';
+import 'package:campus_connect_plus/view/register.view.dart';
 import 'package:campus_connect_plus/widgets/button.widget.dart';
 import 'package:campus_connect_plus/widgets/textform.widget.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -23,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
             width: double.infinity,
             padding: const EdgeInsets.all(15.0),
             child: Container(
-              padding: const EdgeInsets.only(top: 200),
+              padding: const EdgeInsets.only(top: 120),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,7 +80,10 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(
                     height: 30,
                   ),
-                  ButtonGlobal(text: "Login", onTap: () {}),
+                  ButtonGlobal(
+                    text: "Login",
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
@@ -95,7 +99,9 @@ class _LoginViewState extends State<LoginView> {
           children: [
             const Text("Don't have an account?"),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.off(() => const RegisterView());
+              },
               child: Text(
                 "Signup",
                 style: TextStyle(color: GlobalColors.mainColor),
