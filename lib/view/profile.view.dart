@@ -51,7 +51,7 @@ class ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Your profile"),
+        title: const Text("Your Profile"),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -82,16 +82,18 @@ class ProfileViewState extends State<ProfileView> {
                             CircleAvatar(
                               radius: 60,
                               backgroundImage: NetworkImage(
-                                  ApiConstants.baseUrl +
-                                      profile!.data.profilePicture),
+                                ApiConstants.baseUrl +
+                                    profile!.data.profilePicture,
+                              ),
                             ),
                             Positioned(
                               bottom: 0,
                               right: 0,
                               child: Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    color: Colors.white),
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
                                 child: const Icon(
                                   Icons.check_circle,
                                   color: Colors.green,
@@ -101,9 +103,7 @@ class ProfileViewState extends State<ProfileView> {
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                         Text(
                           profile!.data.fullName,
                           style: const TextStyle(
@@ -111,9 +111,7 @@ class ProfileViewState extends State<ProfileView> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
+                        const SizedBox(height: 5.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -122,9 +120,7 @@ class ProfileViewState extends State<ProfileView> {
                               color: Colors.grey,
                               size: 15.0,
                             ),
-                            const SizedBox(
-                              width: 5.0,
-                            ),
+                            const SizedBox(width: 5.0),
                             Text(
                               profile!.data.phoneNumber,
                               style: const TextStyle(
@@ -133,69 +129,8 @@ class ProfileViewState extends State<ProfileView> {
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Card(
-                          elevation: 20,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(FontAwesomeIcons.genderless,
-                                        color: Colors.grey),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      titleCase(profile!.data.gender),
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 30),
-                                Row(
-                                  children: [
-                                    const Icon(FontAwesomeIcons.locationPin,
-                                        color: Colors.grey),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      profile!.data.address,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 30),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      FontAwesomeIcons.graduationCap,
-                                      color: Colors.grey,
-                                      size: 20,
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      "${titleCase(profile!.data.faculty)} Department",
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 30),
-                                Row(
-                                  children: [
-                                    const Icon(FontAwesomeIcons.book,
-                                        color: Colors.grey),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      profile!.data.education,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
+                        const SizedBox(height: 20),
+                        _buildProfileCard(),
                       ],
                     ),
                   ),
@@ -203,8 +138,69 @@ class ProfileViewState extends State<ProfileView> {
               )
             : Center(
                 child: CircularProgressIndicator(
-                color: GlobalColors.mainColor,
-              )),
+                  color: GlobalColors.mainColor,
+                ),
+              ),
+      ),
+    );
+  }
+
+  Widget _buildProfileCard() {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(
+                FontAwesomeIcons.genderless,
+                color: Colors.grey,
+              ),
+              title: Text(
+                titleCase(profile!.data.gender),
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: Icon(
+                FontAwesomeIcons.locationPin,
+                color: Colors.grey,
+              ),
+              title: Text(
+                profile!.data.address,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: Icon(
+                FontAwesomeIcons.graduationCap,
+                color: Colors.grey,
+                size: 20,
+              ),
+              title: Text(
+                "${titleCase(profile!.data.faculty)} Department",
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: Icon(
+                FontAwesomeIcons.book,
+                color: Colors.grey,
+              ),
+              title: Text(
+                profile!.data.education,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/models/profile.model.dart';
 import 'package:campus_connect_plus/services/profile.service.dart';
-import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:campus_connect_plus/view/profile.view.dart';
@@ -55,16 +54,20 @@ class _HomeViewState extends State<HomeView> {
         title: const Text("Dashboard"),
         actions: [
           IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () async {
-                SharedPreferences pref = await prefs;
-                showConfirmationDialog("Are you sure you want to logout?", () {
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              SharedPreferences pref = await prefs;
+              showConfirmationDialog(
+                "Are you sure you want to logout?",
+                () {
                   pref.remove("accessToken");
                   Get.offAll(() => const LoginView());
                   generateSuccessSnackbar(
                       "Success", "Logged out successfully!");
-                });
-              })
+                },
+              );
+            },
+          )
         ],
         elevation: 0,
         centerTitle: true,
@@ -75,7 +78,9 @@ class _HomeViewState extends State<HomeView> {
         child: profile != null
             ? Container(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
+                  vertical: 10.0,
+                  horizontal: 10.0,
+                ),
                 height: MediaQuery.of(context).size.height,
                 color: Colors.grey.shade300,
                 child: Column(
@@ -90,33 +95,66 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     Expanded(
-                        child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        getExpanded("profile", "Profile", "View Profile",
-                            () => Get.to(() => const ProfileView())),
-                        getExpanded("courses", "Courses",
-                            "View Assigned Courses", () => null)
-                      ],
-                    )),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          getExpanded(
+                            "profile",
+                            "Profile",
+                            "View Profile",
+                            () => Get.to(() => const ProfileView()),
+                            Colors.indigo,
+                            Icons.person,
+                          ),
+                          getExpanded(
+                            "courses",
+                            "Courses",
+                            "View Assigned Courses",
+                            () => null,
+                            Colors.orange,
+                            Icons.book,
+                          ),
+                        ],
+                      ),
+                    ),
                     Expanded(
-                        child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        getExpanded("attendance", "Attendance",
-                            "Take Attendance", () => null),
-                        getExpanded(
-                            "exam", "Exam", "Schedule Exams", () => null)
-                      ],
-                    )),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          getExpanded(
+                            "attendance",
+                            "Attendance",
+                            "Take Attendance",
+                            () => null,
+                            Colors.green,
+                            Icons.assignment,
+                          ),
+                          getExpanded(
+                            "exam",
+                            "Exam",
+                            "Schedule Exams",
+                            () => null,
+                            Colors.red,
+                            Icons.event,
+                          ),
+                        ],
+                      ),
+                    ),
                     Expanded(
-                        child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        getExpanded("results", "Results",
-                            "View Student Results", () => null),
-                      ],
-                    ))
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          getExpanded(
+                            "results",
+                            "Results",
+                            "View Student Results",
+                            () => null,
+                            Colors.purple,
+                            Icons.poll,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -131,32 +169,91 @@ class _HomeViewState extends State<HomeView> {
 
   _onBackButtonPressed(BuildContext context) async {
     bool exitApp = await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text("Confirmation"),
-            content: const Text("Do you want to close the app?"),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  child: const Text(
-                    "No",
-                    style: TextStyle(color: Colors.red),
-                  )),
-              TextButton(
-                onPressed: () {
-                  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-                },
-                child: const Text(
-                  "Yes",
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirmation"),
+          content: const Text("Do you want to close the app?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text(
+                "No",
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+
+    return exitApp;
+  }
+
+  Widget getExpanded(
+    String tag,
+    String title,
+    String subtitle,
+    Function()? onPressed,
+    Color color,
+    IconData icon,
+  ) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0, 2),
+                blurRadius: 6.0,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 30.0,
+                backgroundColor: color,
+                child: Icon(
+                  icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 5.0),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.grey,
                 ),
               ),
             ],
-          );
-        });
-
-    return exitApp;
+          ),
+        ),
+      ),
+    );
   }
 }

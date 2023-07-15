@@ -28,7 +28,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             decoration: BoxDecoration(
                 color: GlobalColors.mainColor,
                 borderRadius:
-                    const BorderRadius.only(bottomRight: Radius.circular(50))),
+                    const BorderRadius.only(bottomRight: Radius.circular(0))),
             child: Column(
               children: [
                 const SizedBox(
