@@ -90,7 +90,7 @@ class ProfileViewState extends State<ProfileView> {
                               bottom: 0,
                               right: 0,
                               child: Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
@@ -156,7 +156,7 @@ class ProfileViewState extends State<ProfileView> {
         child: Column(
           children: [
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 FontAwesomeIcons.genderless,
                 color: Colors.grey,
               ),
@@ -167,7 +167,7 @@ class ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 FontAwesomeIcons.locationPin,
                 color: Colors.grey,
               ),
@@ -178,7 +178,7 @@ class ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 FontAwesomeIcons.graduationCap,
                 color: Colors.grey,
                 size: 20,
@@ -190,7 +190,7 @@ class ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 FontAwesomeIcons.book,
                 color: Colors.grey,
               ),
