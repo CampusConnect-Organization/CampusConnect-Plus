@@ -42,7 +42,7 @@ class TextFormGlobal extends StatelessWidget {
             labelText: labelText,
             contentPadding: const EdgeInsets.all(0),
             hintStyle: const TextStyle(height: 1)),
-        onTap: onTap ?? null,
+        onTap: onTap,
       ),
     );
   }

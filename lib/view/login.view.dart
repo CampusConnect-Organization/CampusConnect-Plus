@@ -1,9 +1,14 @@
+import 'package:campus_connect_plus/models/auth/authentication.model.dart';
+import 'package:campus_connect_plus/models/error.model.dart';
+import 'package:campus_connect_plus/services/login.service.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
-import 'package:campus_connect_plus/view/register.view.dart';
+import 'package:campus_connect_plus/view/home.view.dart';
 import 'package:campus_connect_plus/widgets/button.widget.dart';
+import 'package:campus_connect_plus/widgets/snackbar.widget.dart';
 import 'package:campus_connect_plus/widgets/textform.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -13,8 +18,13 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  late final Authentication model;
+  late final Errors errors;
+
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,32 +92,39 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   ButtonGlobal(
                     text: "Login",
-                    onTap: () {},
+                    onTap: () async {
+                      try {
+                        dynamic result = await LoginAPIService().login(
+                            usernameController.text, passwordController.text);
+                        if (result is Authentication) {
+                          model = result;
+                          if (model.success) {
+                            SharedPreferences pref = await prefs;
+                            await pref.setString(
+                                "accessToken", model.data.accessToken);
+                            await pref.setString(
+                                "refreshToken", model.data.refreshToken);
+                            Get.off(() => const HomeView());
+                            generateSuccessSnackbar("Success", model.message);
+                          }
+                        } else if (result is Errors) {
+                          errors = result;
+                          generateErrorSnackbar("Error", errors.message);
+                          passwordController.text = "";
+                        } else {
+                          generateErrorSnackbar(
+                              "Error", "Something went wrong!");
+                        }
+                      } catch (e) {
+                        generateErrorSnackbar(
+                            "Error", "An unspecified error occurred!");
+                      }
+                    },
                   ),
                 ],
               ),
             ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 50,
-        color: Colors.white,
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Don't have an account?"),
-            InkWell(
-              onTap: () {
-                Get.off(() => const RegisterView());
-              },
-              child: Text(
-                "Signup",
-                style: TextStyle(color: GlobalColors.mainColor),
-              ),
-            )
-          ],
         ),
       ),
     );
