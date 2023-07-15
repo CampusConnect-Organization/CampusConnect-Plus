@@ -6,6 +6,7 @@ import 'package:campus_connect_plus/services/profile.service.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:campus_connect_plus/view/profile.view.dart';
+import 'package:campus_connect_plus/view/exams/resultSearch.view.dart';
 import 'package:campus_connect_plus/widgets/dialog.widget.dart';
 import 'package:campus_connect_plus/widgets/profile.widget.dart';
 import 'package:campus_connect_plus/widgets/snackbar.widget.dart';
@@ -148,7 +149,7 @@ class _HomeViewState extends State<HomeView> {
                             "results",
                             "Results",
                             "View Student Results",
-                            () => null,
+                            () => Get.to(() => const ResultSearchView()),
                             Colors.purple,
                             Icons.poll,
                           ),

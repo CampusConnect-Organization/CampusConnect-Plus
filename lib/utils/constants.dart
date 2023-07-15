@@ -5,6 +5,7 @@ class ApiConstants {
   static String loginEndpoint = 'api/auth/instructor-login/';
   static String registerEndpoint = 'api/auth/register/';
   static String profileEndpoint = 'api/instructor/me/';
+  static String resultsEndpoint = 'api/results/result/';
 }
 
 String titleCase(String input) {
