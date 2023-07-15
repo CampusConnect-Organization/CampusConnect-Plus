@@ -40,9 +40,9 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   const Center(
                     child: Image(
-                      image: AssetImage("images/logo.png"),
-                      height: 100,
-                      width: 100,
+                      image: AssetImage("images/logo-dark.png"),
+                      height: 150,
+                      width: 150,
                     ),
                   ),
                   Container(
