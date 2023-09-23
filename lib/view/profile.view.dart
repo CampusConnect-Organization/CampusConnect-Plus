@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:campus_connect_plus/models/profile.model.dart';
 import 'package:campus_connect_plus/services/profile.service.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
@@ -7,6 +9,7 @@ import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -18,6 +21,11 @@ class ProfileView extends StatefulWidget {
 class ProfileViewState extends State<ProfileView> {
   InstructorProfile? profile;
   bool isRefreshing = false;
+
+  final ImagePicker _imagePicker = ImagePicker();
+
+
+   
 
   @override
   void initState() {
@@ -45,6 +53,15 @@ class ProfileViewState extends State<ProfileView> {
     setState(() {
       isRefreshing = false;
     });
+  }
+
+  Future<void> _pickProfilePicture() async{
+    final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
+    if(pickedFile != null){
+      File imageFile = File(pickedFile.path);
+      await ProfileAPIService().updateProfilePicture(imageFile);
+      await refreshProfile();
+    }
   }
 
   @override
@@ -77,31 +94,32 @@ class ProfileViewState extends State<ProfileView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundImage: NetworkImage(
-                                ApiConstants.baseUrl +
-                                    profile!.data.profilePicture,
+                        GestureDetector(
+                          onTap: _pickProfilePicture,
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 50,
+                                backgroundImage: NetworkImage(ApiConstants.baseUrl +
+                                    profile!.data.profilePicture),
                               ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.white,
+                                  ),
+                                  child: const Icon(
+                                    Icons.check_circle,
+                                    color: Colors.green,
+                                    size: 30,
+                                  ),
                                 ),
-                                child: const Icon(
-                                  Icons.check_circle,
-                                  color: Colors.green,
-                                  size: 30.0,
-                                ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 20),
                         Text(
