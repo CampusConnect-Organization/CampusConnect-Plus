@@ -4,6 +4,7 @@ import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/models/profile.model.dart';
 import 'package:campus_connect_plus/services/profile.service.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
+import 'package:campus_connect_plus/view/exams/exam.view.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:campus_connect_plus/view/profile.view.dart';
 import 'package:campus_connect_plus/view/exams/resultSearch.view.dart';
@@ -134,7 +135,7 @@ class _HomeViewState extends State<HomeView> {
                             "exam",
                             "Exam",
                             "Schedule Exams",
-                            () => null,
+                            () => Get.to(() => const ExamView()),
                             Colors.red,
                             Icons.event,
                           ),

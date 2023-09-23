@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ApiConstants {
-  static String baseUrl = 'http://192.168.1.70:8000/';
+  static String baseUrl = 'http://thenishantsapkota.pythonanywhere.com/';
   static String loginEndpoint = 'api/auth/instructor-login/';
   static String registerEndpoint = 'api/auth/register/';
   static String profileEndpoint = 'api/instructor/me/';
   static String resultsEndpoint = 'api/results/result/';
+  static String instructorCoursesEndpoint = 'api/courses/instructor-courses/';
+  static String createExamEndpoint = 'api/grades/exam/';
 }
 
 String titleCase(String input) {
