@@ -40,7 +40,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     "Hi, Er. ${widget.firstName}!",
                     style: Theme.of(context)
                         .textTheme
-                        .headlineSmall
+                        .titleLarge
                         ?.copyWith(color: Colors.white),
                   ),
                   subtitle: Text(
@@ -48,7 +48,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(color: Colors.white54),
+                        ?.copyWith(color: Colors.white54, fontSize: 14.0),
                   ),
                   trailing: CircleAvatar(
                     radius: 30.0,

@@ -6,6 +6,7 @@ import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
 import 'package:campus_connect_plus/view/home.view.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
+import 'package:campus_connect_plus/widgets/spinner.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -155,7 +156,7 @@ class ProfileViewState extends State<ProfileView> {
                 ),
               )
             : Center(
-                child: CircularProgressIndicator(
+                child: ModernSpinner(
                   color: GlobalColors.mainColor,
                 ),
               ),

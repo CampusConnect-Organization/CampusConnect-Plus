@@ -11,6 +11,7 @@ import 'package:campus_connect_plus/view/exams/resultSearch.view.dart';
 import 'package:campus_connect_plus/widgets/dialog.widget.dart';
 import 'package:campus_connect_plus/widgets/profile.widget.dart';
 import 'package:campus_connect_plus/widgets/snackbar.widget.dart';
+import 'package:campus_connect_plus/widgets/spinner.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -53,10 +54,10 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard"),
+        title: const Text("Dashboard", style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.white),
             onPressed: () async {
               SharedPreferences pref = await prefs;
               showConfirmationDialog(
@@ -71,6 +72,13 @@ class _HomeViewState extends State<HomeView> {
             },
           )
         ],
+        leading: IconButton(
+          icon: const Icon(Icons.dark_mode, color: Colors.white),
+          onPressed: () => {
+            generateErrorSnackbar(
+                "Unimplemented", "Feature not implemented yet!")
+          },
+        ),
         elevation: 0,
         centerTitle: true,
         backgroundColor: GlobalColors.mainColor,
@@ -111,8 +119,11 @@ class _HomeViewState extends State<HomeView> {
                           getExpanded(
                             "courses",
                             "Courses",
-                            "View Assigned Courses",
-                            () => null,
+                            "Assigned Courses",
+                            () => {
+                              generateErrorSnackbar("Unimplemented",
+                                  "Feature not implemented yet!")
+                            },
                             Colors.orange,
                             Icons.book,
                           ),
@@ -127,7 +138,10 @@ class _HomeViewState extends State<HomeView> {
                             "attendance",
                             "Attendance",
                             "Take Attendance",
-                            () => null,
+                            () => {
+                              generateErrorSnackbar("Unimplemented",
+                                  "Feature not implemented yet!")
+                            },
                             Colors.green,
                             Icons.assignment,
                           ),
@@ -161,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               )
             : Center(
-                child: CircularProgressIndicator(
+                child: ModernSpinner(
                   color: GlobalColors.mainColor,
                 ),
               ),

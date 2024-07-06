@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/models/exams/exam.model.dart';
+import 'package:campus_connect_plus/models/exams/getExam.model.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:get/get.dart';
@@ -55,5 +56,29 @@ class ExamAPIService {
     log(e.toString());
   }
 }
+
+Future<dynamic> getExams() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.examsEndpoint);
+      Object? accessToken = prefs.get("accessToken");
+      if (accessToken == null) {
+        Get.off(() => const LoginView());
+      }
+      var response = await http
+          .get(url, headers: {"Authorization": "Bearer $accessToken"});
+
+
+      if (response.statusCode == 200) {
+        Exams exams = examsFromJson(response.body);
+        return exams;
+      } else {
+        Errors errors = errorsFromJson(response.body);
+        return errors;
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
 
 }

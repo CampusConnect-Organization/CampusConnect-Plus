@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:campus_connect_plus/utils/global.colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,23 +10,28 @@ class ButtonGlobal extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         alignment: Alignment.center,
         height: 55,
         decoration: BoxDecoration(
-            color: GlobalColors.mainColor,
-            borderRadius: BorderRadius.circular(6),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-              )
-            ]),
+          color: GlobalColors.mainColor,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
         child: Text(
           text,
           style: const TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.w600,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
           ),
         ),
       ),

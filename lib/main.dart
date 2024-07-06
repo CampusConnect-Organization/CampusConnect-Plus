@@ -11,10 +11,30 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
-      home: SplashView(),
+      theme: ThemeData(
+        fontFamily: 'Inter',
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            fontSize: 14.0,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.normal,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 12.0,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.normal,
+          ),
+          titleLarge: TextStyle(
+            fontSize: 18.0,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      home: const SplashView(),
     );
   }
 }

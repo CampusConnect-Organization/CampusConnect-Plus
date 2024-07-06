@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ApiConstants {
-  static String baseUrl = 'http://192.168.1.70:8000/';
+  static String baseUrl =
+      'http://ec2-52-90-163-66.compute-1.amazonaws.com:8000/';
   static String loginEndpoint = 'api/auth/instructor-login/';
   static String registerEndpoint = 'api/auth/register/';
   static String profileEndpoint = 'api/instructor/me/';
   static String resultsEndpoint = 'api/results/result/';
   static String instructorCoursesEndpoint = 'api/courses/instructor-courses/';
   static String createExamEndpoint = 'api/grades/exam/';
+  static String examsEndpoint = "api/grades/instructor-exams/";
 }
 
 String titleCase(String input) {
@@ -30,36 +32,40 @@ Expanded getExpanded(
     child: InkWell(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(
-          left: 10.0,
-          top: 10.0,
-          right: 10.0,
-          bottom: 10.0,
-        ),
-        decoration: const BoxDecoration(
+        margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(5.0),
-            topRight: Radius.circular(5.0),
-            bottomLeft: Radius.circular(5.0),
-            bottomRight: Radius.circular(5.0),
-          ),
-          boxShadow: [BoxShadow()],
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10.0,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              "images/$image.png",
-              height: 80.0,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: Image.asset(
+                "images/$image.png",
+                height: 70.0,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
-              height: 5.0,
+              height: 10.0,
             ),
             Text(
               mainText,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 5.0,
@@ -67,9 +73,12 @@ Expanded getExpanded(
             Text(
               subText,
               style: const TextStyle(
-                fontSize: 13.0,
+                fontWeight: FontWeight.w500,
+                fontSize: 12.0,
+                color: Colors.black54,
               ),
-            )
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

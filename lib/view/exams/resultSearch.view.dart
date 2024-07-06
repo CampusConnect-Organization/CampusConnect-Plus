@@ -22,11 +22,11 @@ class _ResultSearchViewState extends State<ResultSearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Search Results"),
+        title: const Text("Search Results", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: GlobalColors.mainColor,
         leading: IconButton(
-          icon: const Icon(FontAwesomeIcons.arrowLeft),
+          icon: const Icon(FontAwesomeIcons.arrowLeft, color: Colors.white),
           onPressed: () => Get.off(() => const HomeView()),
         ),
       ),
