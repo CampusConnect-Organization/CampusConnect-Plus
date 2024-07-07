@@ -127,6 +127,14 @@ class _CreateExamViewState extends State<CreateExamView> {
     }
   }
 
+  String formatTimeOfDay(TimeOfDay tod) {
+  final hour = tod.hourOfPeriod == 0 ? 12 : tod.hourOfPeriod;
+  final minute = tod.minute.toString().padLeft(2, '0');
+  final period = tod.period == DayPeriod.am ? 'AM' : 'PM';
+
+  return '$hour:$minute $period';
+}
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -182,7 +190,10 @@ class _CreateExamViewState extends State<CreateExamView> {
                         ].map((examType) {
                           return DropdownMenuItem<String>(
                             value: examType,
-                            child: Text(examType, style: const TextStyle(fontSize: 14),),
+                            child: Text(
+                              examType,
+                              style: const TextStyle(fontSize: 14),
+                            ),
                           );
                         }).toList(),
                         decoration: const InputDecoration(
@@ -204,14 +215,20 @@ class _CreateExamViewState extends State<CreateExamView> {
                           // Placeholder item with value 0
                           const DropdownMenuItem<int>(
                             value: 0,
-                            child: Text('Select a Course', style: TextStyle(fontSize: 14),),
+                            child: Text(
+                              'Select a Course',
+                              style: TextStyle(fontSize: 14),
+                            ),
                           ),
                           // Actual course items
                           ...(courses?.data.map((course) {
                                 return DropdownMenuItem<int>(
                                   value:
                                       course.id, // Ensure each value is unique
-                                  child: Text(course.course, style: const TextStyle(fontSize: 14),),
+                                  child: Text(
+                                    course.course,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
                                 );
                               }) ??
                               []),
@@ -250,16 +267,15 @@ class _CreateExamViewState extends State<CreateExamView> {
                       InkWell(
                         onTap: () => _selectTime(context),
                         child: InputDecorator(
-                          decoration: const InputDecoration(
-                            labelText: 'Time',
-                            border: OutlineInputBorder(),
-                          ),
-                          child: Text(
-                            _selectedTime != null
-                                ? "${_selectedTime!.hour}:${_selectedTime!.minute}"
-                                : 'Select Time',
-                          ),
-                        ),
+                            decoration: const InputDecoration(
+                              labelText: 'Time',
+                              border: OutlineInputBorder(),
+                            ),
+                            child: Text(
+                              _selectedTime != null
+                                  ? formatTimeOfDay(_selectedTime!)
+                                  : 'Select Time',
+                            )),
                       ),
                       const SizedBox(height: 16.0),
 
