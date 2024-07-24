@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ApiConstants {
-  static String baseUrl =
-      'http://ec2-52-90-163-66.compute-1.amazonaws.com:8000/';
+  static String baseUrl = 'http://192.168.1.230:8000/';
   static String loginEndpoint = 'api/auth/instructor-login/';
   static String registerEndpoint = 'api/auth/register/';
   static String profileEndpoint = 'api/instructor/me/';
@@ -10,6 +9,7 @@ class ApiConstants {
   static String instructorCoursesEndpoint = 'api/courses/instructor-courses/';
   static String createExamEndpoint = 'api/grades/exam/';
   static String examsEndpoint = "api/grades/instructor-exams/";
+  static String instructorCourseStudentsEndpoint = 'api/courses/instructor-courses/enrolls/';
 }
 
 String titleCase(String input) {

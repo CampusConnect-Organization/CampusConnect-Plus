@@ -4,7 +4,9 @@ import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/models/profile.model.dart';
 import 'package:campus_connect_plus/services/profile.service.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
+import 'package:campus_connect_plus/view/attendance/assignedCourses.view.dart';
 import 'package:campus_connect_plus/view/exams/exam.view.dart';
+import 'package:campus_connect_plus/view/instructor_courses/instructor_courses.view.dart';
 import 'package:campus_connect_plus/view/login.view.dart';
 import 'package:campus_connect_plus/view/profile.view.dart';
 import 'package:campus_connect_plus/view/exams/resultSearch.view.dart';
@@ -120,10 +122,7 @@ class _HomeViewState extends State<HomeView> {
                             "courses",
                             "Courses",
                             "Assigned Courses",
-                            () => {
-                              generateErrorSnackbar("Unimplemented",
-                                  "Feature not implemented yet!")
-                            },
+                            () => {Get.to(() => const InstructorCoursesView())},
                             Colors.orange,
                             Icons.book,
                           ),
@@ -138,10 +137,7 @@ class _HomeViewState extends State<HomeView> {
                             "attendance",
                             "Attendance",
                             "Take Attendance",
-                            () => {
-                              generateErrorSnackbar("Unimplemented",
-                                  "Feature not implemented yet!")
-                            },
+                            () => {Get.to(() => const AssignedCoursesView())},
                             Colors.green,
                             Icons.assignment,
                           ),

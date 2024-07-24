@@ -1,6 +1,6 @@
 import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/models/exams/exam.model.dart';
-import 'package:campus_connect_plus/models/instructorCourses.model.dart';
+import 'package:campus_connect_plus/models/courses/instructorCourses.model.dart';
 import 'package:campus_connect_plus/services/exam.service.dart'; // Import your exam service file here
 import 'package:campus_connect_plus/services/instructorCourse.service.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';

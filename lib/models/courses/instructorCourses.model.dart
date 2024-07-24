@@ -38,6 +38,7 @@ class InstructorCourseData {
     String instructor;
     String start;
     String end;
+    String semester;
 
     InstructorCourseData({
         required this.id,
@@ -45,6 +46,7 @@ class InstructorCourseData {
         required this.instructor,
         required this.start,
         required this.end,
+        required this.semester,
     });
 
     factory InstructorCourseData.fromJson(Map<String, dynamic> json) => InstructorCourseData(
@@ -53,6 +55,7 @@ class InstructorCourseData {
         instructor: json["instructor"],
         start: json["start"],
         end: json["end"],
+        semester: json["semester"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -61,5 +64,6 @@ class InstructorCourseData {
         "instructor": instructor,
         "start": start,
         "end": end,
+        "semester": semester,
     };
 }
