@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,7 @@ class _CourseStudentsViewState extends State<CourseStudentsView> {
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(15),
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(ApiConstants.baseUrl +
+                        backgroundImage: CachedNetworkImageProvider(ApiConstants.baseUrl +
                                     currentItem!.profile_picture),
                       ),
                       title: Text(

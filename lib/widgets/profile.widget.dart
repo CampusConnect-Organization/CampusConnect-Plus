@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/utils/global.colors.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   trailing: CircleAvatar(
                     radius: 30.0,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: CachedNetworkImageProvider(
                         ApiConstants.baseUrl + widget.profilePicture),
                   ),
                 ),

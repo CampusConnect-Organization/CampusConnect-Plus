@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campus_connect_plus/models/error.model.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/view/attendance/student_attendance_detail.view.dart';
@@ -154,7 +155,7 @@ class _MarkAttendanceViewState extends State<MarkAttendanceView> {
                           children: [
                             CircleAvatar(
                               backgroundColor: GlobalColors.mainColor.withOpacity(0.8),
-                              backgroundImage: NetworkImage(
+                              backgroundImage: CachedNetworkImageProvider(
                                   "${ApiConstants.baseUrl}${currentItem!.profile_picture}"),
                             ),
                             const SizedBox(width: 10),

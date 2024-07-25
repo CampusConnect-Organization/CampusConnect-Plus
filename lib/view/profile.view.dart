@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campus_connect_plus/models/profile.model.dart';
 import 'package:campus_connect_plus/services/profile.service.dart';
 import 'package:campus_connect_plus/utils/constants.dart';
@@ -101,7 +102,7 @@ class ProfileViewState extends State<ProfileView> {
                             children: [
                               CircleAvatar(
                                 radius: 50,
-                                backgroundImage: NetworkImage(ApiConstants.baseUrl +
+                                backgroundImage: CachedNetworkImageProvider(ApiConstants.baseUrl +
                                     profile!.data.profilePicture),
                               ),
                               Positioned(

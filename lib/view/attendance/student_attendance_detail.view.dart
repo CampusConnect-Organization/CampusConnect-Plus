@@ -29,7 +29,7 @@ class _StudentAttendanceDetailViewState
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   Map<DateTime, String> attendanceMap = {};
-  String errorMessage = ''; // Variable to hold error message
+  String errorMessage = '';
 
   @override
   void initState() {
@@ -40,7 +40,7 @@ class _StudentAttendanceDetailViewState
   Future<void> fetchAttendances() async {
     setState(() {
       isRefreshing = true;
-      errorMessage = ''; // Clear any previous error message
+      errorMessage = '';
     });
 
     try {
