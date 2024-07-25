@@ -1,8 +1,11 @@
+import 'package:campus_connect_plus/utils/constants.dart';
 import 'package:campus_connect_plus/view/splash.view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ApiConstants.loadBaseUrl();
   runApp(const App());
 }
 
